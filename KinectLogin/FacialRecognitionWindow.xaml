@@ -1,0 +1,49 @@
+﻿<Window 
+        x:Class="KinectLogin.FacialRecognitionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:KinectLogin"
+        Title="Record Facial Model"
+        Closed="WindowClosed"
+        Height="760.5" Width="770" 
+        >
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e"/>
+        <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ff52318f"/>
+        <SolidColorBrush x:Key="KinectBlueBrush" Color="#ff00BCF2"/>
+        <Style TargetType="{x:Type Image}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Name="MainGrid" Width="640" Height="480" Margin="0,110,0,0">
+
+        <Label x:Name="nameLabel" Content="Name:" HorizontalContentAlignment="Left" HorizontalAlignment="Right" Margin="0,-166,350,0" VerticalAlignment="Top" RenderTransformOrigin="-7.295,2.808" FontSize="16" Width="61"/>
+        <TextBox x:Name="name" HorizontalAlignment="Left" Height="23" Margin="300,-160,0,0" HorizontalContentAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="340" RenderTransformOrigin="2.2,0.478" ForceCursor="True"/>
+
+        <!--<TextBlock x:Name="welcomeMessage" TextAlignment="Center" HorizontalAlignment="Stretch" Margin="0,-170,0,0" TextWrapping="Wrap" Text="Welcome. Please start by recording your face." VerticalAlignment="Top" FontSize="18" Width="380"/>-->
+        <Label Content="Status:" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" Margin="229,-132,345,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBlock x:Name="faceStatus" HorizontalAlignment="Center" Margin="300,-127,-55,0" TextWrapping="Wrap" Text="Scanning..." VerticalAlignment="Top" FontSize="16" Width="395"/>
+
+        <Button Content="Record 3D Face Model" HorizontalAlignment="Stretch" Margin="397,-47,93,0" VerticalAlignment="Top" Width="150" Click="Save_Click"/>
+
+        <Image Name="ColorImage"/>
+        <local:FaceTrackingViewer x:Name="faceTrackingViewer" />
+
+        <Button x:Name="continueButton" Content="Continue" HorizontalAlignment="Stretch" Margin="0,507,0,-58" VerticalAlignment="Top" Width="74" Click="Finish_Click" IsEnabled="False"/>
+        <Label Content="Match:" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" Margin="229,-95,345,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBlock x:Name="matchStatus" HorizontalAlignment="Center" Margin="300,-90,-55,0" TextWrapping="Wrap" Text="Waiting for 3D Face Model..." VerticalAlignment="Top" FontSize="16" Width="395" Height="29"/>
+
+        <Label Content="3D Face Identification Algorithm:" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" Margin="-60,-166,434,0" VerticalAlignment="Top" FontSize="16"/>
+        <StackPanel x:Name="algorithm">
+            <RadioButton x:Name="Naive_Bayes_Point_Locations" GroupName="Algorithm" Content="Naive Bayes with FP Locations" HorizontalAlignment="Left" Margin="-55,-126,0,0" VerticalAlignment="Top" />
+            <RadioButton x:Name="Random_Trees_Point_Locations" GroupName="Algorithm" Content="Random Trees with FP Locations" HorizontalAlignment="Left" Margin="-55,-106,0,0" VerticalAlignment="Top" />
+            <RadioButton x:Name="Support_Vector_Machine_Distances" GroupName="Algorithm" Content="SVM with FP Locations" HorizontalAlignment="Left" Margin="-55,-86,0,0" VerticalAlignment="Top" />
+            <RadioButton x:Name="Naive_Bayes_Point_Distances" GroupName="Algorithm" Content="Naive Bayes with FP Distances" HorizontalAlignment="Left" Margin="-55,-66,0,0" VerticalAlignment="Top" />
+            <RadioButton x:Name="Threshold_All_Distances_Between_All_Feature_Points" GroupName="Algorithm" Content="Threshold all distances between FPs +/- 10%" HorizontalAlignment="Left" Margin="-55,-46,0,0" VerticalAlignment="Top" />
+			<RadioButton x:Name="HyperNEAT" GroupName="Algorithm" Content="HyperNEAT" HorizontalAlignment="Left" Margin="-55,-26,0,0" VerticalAlignment="Top" IsChecked="True" />
+		</StackPanel>
+    </Grid>
+
+</Window>
